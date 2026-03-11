@@ -1,83 +1,110 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/core/design_system/app_color_scheme.dart';
-import 'package:portfolio/core/design_system/app_colors.dart';
-import 'package:portfolio/core/design_system/app_text_styles.dart';
-import 'package:portfolio/shared/widgets/vapor_button.dart';
+import 'package:portfolio/features/home/presentation/sections/about_section.dart';
+import 'package:portfolio/features/home/presentation/sections/contact_section.dart';
+import 'package:portfolio/features/home/presentation/sections/experience_section.dart';
+import 'package:portfolio/features/home/presentation/sections/hero_section.dart';
+import 'package:portfolio/features/home/presentation/sections/projects_section.dart';
+import 'package:portfolio/features/home/presentation/sections/skills_section.dart';
+import 'package:portfolio/shared/widgets/nav_bar.dart';
+import 'package:portfolio/shared/widgets/scanline_overlay.dart';
 
-class HomeView extends StatelessWidget {
+/// GlobalKey registry for smooth-scroll navigation from the NavBar.
+class SectionKeys {
+  SectionKeys._();
+
+  static final hero = GlobalKey();
+  static final skills = GlobalKey();
+  static final projects = GlobalKey();
+  static final experience = GlobalKey();
+  static final contact = GlobalKey();
+
+  static Map<String, GlobalKey> get all => {
+        'hero': hero,
+        'skills': skills,
+        'projects': projects,
+        'experience': experience,
+        'contact': contact,
+      };
+}
+
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final vc = context.vaporColors;
+  State<HomeView> createState() => _HomeViewState();
+}
 
+class _HomeViewState extends State<HomeView> {
+  final _scrollController = ScrollController();
+  double _scrollOffset = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(
+      () => setState(() => _scrollOffset = _scrollController.offset),
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: [
-          // Background Void
-          Container(color: vc.voidBackground),
+          children: [
+            // ── Scrollable page content ─────────────────────
+            SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  // Hero — full viewport height
+                  SizedBox(key: SectionKeys.hero, child: const HeroSection()),
 
-          // Main Content
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Hero Headline — gradient text fill (sunset)
-                ShaderMask(
-                  shaderCallback: (bounds) =>
-                      AppColors.sunsetGradient.createShader(
-                    Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                  // About
+                  const AboutSection(),
+
+                  // Skills
+                  SizedBox(
+                    key: SectionKeys.skills,
+                    child: const SkillsSection(),
                   ),
-                  child: Text(
-                    'PHU NGUYEN',
-                    style: AppTextStyles.heroHeadlineBase
-                        .copyWith(color: Colors.white),
+
+                  // Projects
+                  SizedBox(
+                    key: SectionKeys.projects,
+                    child: const ProjectsSection(),
                   ),
-                ),
 
-                const SizedBox(height: 16),
-
-                // Subtitle with Cyan Glow
-                Text(
-                  '> SENIOR FLUTTER DEVELOPER',
-                  style: AppTextStyles.withGlow(
-                    AppTextStyles.uiLabelBase.copyWith(
-                      fontSize: 20,
-                      color: vc.electricCyan,
-                    ),
-                    vc.electricCyan,
+                  // Experience
+                  SizedBox(
+                    key: SectionKeys.experience,
+                    child: const ExperienceSection(),
                   ),
-                ),
 
-                const SizedBox(height: 48),
-
-                // Vapor Button
-                VaporButton(
-                  label: 'EXPLORE ARCHIVE',
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-
-          // Global Scanlines Overlay (CRT effect)
-          IgnorePointer(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    vc.scanlineColor,
-                    Colors.transparent,
-                    vc.scanlineColor,
-                  ],
-                  stops: const [0.0, 0.5, 1.0],
-                ),
+                  // Contact + Footer
+                  SizedBox(
+                    key: SectionKeys.contact,
+                    child: const ContactSection(),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+
+            // ── Sticky glass navigation ─────────────────────
+            PortfolioNavBar(
+              scrollOffset: _scrollOffset,
+              sectionKeys: SectionKeys.all,
+              scrollController: _scrollController,
+            ),
+
+            // ── Global CRT scanline overlay ─────────────────
+            const ScanlineOverlay(),
+          ],
       ),
     );
   }
