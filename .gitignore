@@ -54,3 +54,5 @@ app.*.map.json
 
 # Vercel local config (contains project ID / org ID - use GitHub Secrets instead)
 .vercel/
+.vercel
+.env*.local
