@@ -56,57 +56,50 @@ class ProjectsSection extends StatelessWidget {
 
               // ── Desktop: featured wide + 2 stacked on right ──────────────
               if (isDesktop) ...[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 6,
-                      child: AnimateOnScroll(
-                        id: 'project-featured',
-                        delay: 100.ms,
-                        child: _ProjectCard(
-                          project: featured,
-                          isFeatured: true,
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        flex: 6,
+                        child: AnimateOnScroll(
+                          id: 'project-featured',
+                          delay: 100.ms,
+                          child: _ProjectCard(
+                            project: featured,
+                            isFeatured: true,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        children: [
-                          for (final (i, p) in others.take(2).indexed)
-                            Padding(
-                              padding: EdgeInsets.only(bottom: i < 1 ? 20 : 0),
-                              child: AnimateOnScroll(
-                                id: 'project-other-$i',
-                                delay: (200 + i * 120).ms,
-                                child: _ProjectCard(project: p),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        flex: 4,
+                        child: Column(
+                          children: [
+                            for (final (i, p) in others.take(2).indexed)
+                              Expanded(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(bottom: i < 1 ? 20 : 0),
+                                  child: AnimateOnScroll(
+                                    id: 'project-other-$i',
+                                    delay: (200 + i * 120).ms,
+                                    child: _ProjectCard(project: p),
+                                  ),
+                                ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 if (others.length > 2) ...[
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      for (final (i, p) in others.skip(2).indexed)
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              right: i < others.skip(2).length - 1 ? 20 : 0,
-                            ),
-                            child: AnimateOnScroll(
-                              id: 'project-extra-$i',
-                              delay: (400 + i * 120).ms,
-                              child: _ProjectCard(project: p),
-                            ),
-                          ),
-                        ),
-                    ],
+                  _ProjectGrid(
+                    projects: others.skip(2).toList(),
+                    startIndex: 3,
+                    columns: 3,
                   ),
                 ],
 
@@ -141,46 +134,46 @@ class ProjectsSection extends StatelessWidget {
   }
 }
 
-// ─── 2-Column Grid (tablet) ───────────────────────────────────────────────────
+// ─── Project Grid (configurable columns, equal-height rows) ──────────────────
 
 class _ProjectGrid extends StatelessWidget {
-  const _ProjectGrid({required this.projects, this.startIndex = 0});
+  const _ProjectGrid({
+    required this.projects,
+    this.startIndex = 0,
+    this.columns = 2,
+  });
 
   final List<Project> projects;
   final int startIndex;
+  final int columns;
 
   @override
   Widget build(BuildContext context) {
     final rows = <Widget>[];
-    for (var i = 0; i < projects.length; i += 2) {
-      final left = projects[i];
-      final right = i + 1 < projects.length ? projects[i + 1] : null;
+    for (var i = 0; i < projects.length; i += columns) {
+      final rowItems = projects.skip(i).take(columns).toList();
 
       rows.add(
         Padding(
           padding: const EdgeInsets.only(bottom: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: AnimateOnScroll(
-                  id: 'project-grid-${startIndex + i}',
-                  delay: (i * 80).ms,
-                  child: _ProjectCard(project: left),
-                ),
-              ),
-              if (right != null) ...[
-                const SizedBox(width: 20),
-                Expanded(
-                  child: AnimateOnScroll(
-                    id: 'project-grid-${startIndex + i + 1}',
-                    delay: ((i + 1) * 80).ms,
-                    child: _ProjectCard(project: right),
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (var j = 0; j < columns; j++) ...[
+                  if (j > 0) const SizedBox(width: 20),
+                  Expanded(
+                    child: j < rowItems.length
+                        ? AnimateOnScroll(
+                            id: 'project-grid-${startIndex + i + j}',
+                            delay: ((i + j) * 80).ms,
+                            child: _ProjectCard(project: rowItems[j]),
+                          )
+                        : const SizedBox.shrink(), // empty slot filler
                   ),
-                ),
-              ] else
-                const Expanded(child: SizedBox.shrink()),
-            ],
+                ],
+              ],
+            ),
           ),
         ),
       );
