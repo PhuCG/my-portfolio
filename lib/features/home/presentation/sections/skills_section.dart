@@ -65,6 +65,7 @@ class SkillsSection extends StatelessWidget {
                                   child: _SkillCard(
                                     group: e.value,
                                     delay: (e.key * 150).ms,
+                                    fillHeight: true,
                                   ),
                                 ),
                               ),
@@ -96,10 +97,15 @@ class SkillsSection extends StatelessWidget {
 }
 
 class _SkillCard extends StatelessWidget {
-  const _SkillCard({required this.group, required this.delay});
+  const _SkillCard({
+    required this.group,
+    required this.delay,
+    this.fillHeight = false,
+  });
 
   final SkillGroup group;
   final Duration delay;
+  final bool fillHeight;
 
   static const _accentColors = [
     Color(0xFF00FFFF), // electricCyan
@@ -120,6 +126,7 @@ class _SkillCard extends StatelessWidget {
         title: group.title,
         titleAccentColor: accent,
         statusText: '${group.skills.length} modules loaded',
+        fillHeight: fillHeight,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: group.skills.map((skill) {
