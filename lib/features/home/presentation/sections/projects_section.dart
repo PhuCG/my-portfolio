@@ -7,6 +7,7 @@ import 'package:portfolio/core/design_system/app_spacing.dart';
 import 'package:portfolio/core/design_system/app_text_styles.dart';
 import 'package:portfolio/features/home/data/portfolio_data.dart';
 import 'package:portfolio/features/home/domain/models.dart';
+import 'package:portfolio/shared/widgets/animate_on_scroll.dart';
 import 'package:portfolio/shared/widgets/section_header.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -16,18 +17,21 @@ class ProjectsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vc = context.vaporColors;
-    final isDesktop = MediaQuery.sizeOf(context).width >= 1024;
+    final width = MediaQuery.sizeOf(context).width;
+    final isDesktop = width >= AppSpacing.breakpointLg;   // ≥ 1024
+    final isTablet = width >= AppSpacing.breakpointMd &&
+        width < AppSpacing.breakpointLg;                  // 768 – 1023
 
-    final featured =
-        PortfolioData.projects.where((p) => p.isFeatured).first;
-    final others =
-        PortfolioData.projects.where((p) => !p.isFeatured).toList();
+    final featured = PortfolioData.projects.where((p) => p.isFeatured).first;
+    final others = PortfolioData.projects.where((p) => !p.isFeatured).toList();
 
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        vertical: AppSpacing.sectionPaddingDesktop,
-        horizontal: 24,
+        vertical: isDesktop
+            ? AppSpacing.sectionPaddingDesktop
+            : AppSpacing.sectionPaddingMobile,
+        horizontal: isDesktop ? 24 : 16,
       ),
       color: vc.voidBackground,
       child: Center(
@@ -37,31 +41,32 @@ class ProjectsSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SectionHeader(
-                label: 'PROJECTS',
-                subtitle:
-                    'Production-shipped products that reached real users.',
-              )
-                  .animate()
-                  .fadeIn(duration: 600.ms)
-                  .slideY(begin: 0.2),
+              AnimateOnScroll(
+                id: 'projects-header',
+                child: SectionHeader(
+                  label: 'PROJECTS',
+                  subtitle:
+                      'Production-shipped products that reached real users.',
+                ),
+              ),
 
               const SizedBox(height: 48),
 
+              // ── Desktop: featured wide + 2 stacked on right ──────────────
               if (isDesktop) ...[
-                // Featured card (wide) + right column (2 stacked)
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       flex: 6,
-                      child: _ProjectCard(
-                        project: featured,
-                        isFeatured: true,
-                      )
-                          .animate()
-                          .fadeIn(duration: 700.ms, delay: 200.ms)
-                          .slideY(begin: 0.1),
+                      child: AnimateOnScroll(
+                        id: 'project-featured',
+                        delay: 100.ms,
+                        child: _ProjectCard(
+                          project: featured,
+                          isFeatured: true,
+                        ),
+                      ),
                     ),
                     const SizedBox(width: 20),
                     Expanded(
@@ -70,14 +75,12 @@ class ProjectsSection extends StatelessWidget {
                         children: [
                           for (final (i, p) in others.take(2).indexed)
                             Padding(
-                              padding:
-                                  EdgeInsets.only(bottom: i < 1 ? 20 : 0),
-                              child: _ProjectCard(project: p)
-                                  .animate()
-                                  .fadeIn(
-                                      duration: 700.ms,
-                                      delay: (300 + i * 150).ms)
-                                  .slideY(begin: 0.1),
+                              padding: EdgeInsets.only(bottom: i < 1 ? 20 : 0),
+                              child: AnimateOnScroll(
+                                id: 'project-other-$i',
+                                delay: (200 + i * 120).ms,
+                                child: _ProjectCard(project: p),
+                              ),
                             ),
                         ],
                       ),
@@ -92,30 +95,43 @@ class ProjectsSection extends StatelessWidget {
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                right:
-                                    i < others.skip(2).length - 1 ? 20 : 0),
-                            child: _ProjectCard(project: p)
-                                .animate()
-                                .fadeIn(
-                                    duration: 700.ms,
-                                    delay: (500 + i * 150).ms)
-                                .slideY(begin: 0.1),
+                              right: i < others.skip(2).length - 1 ? 20 : 0,
+                            ),
+                            child: AnimateOnScroll(
+                              id: 'project-extra-$i',
+                              delay: (400 + i * 120).ms,
+                              child: _ProjectCard(project: p),
+                            ),
                           ),
                         ),
                     ],
                   ),
                 ],
+
+              // ── Tablet: featured full-width + 2-col grid below ───────────
+              ] else if (isTablet) ...[
+                AnimateOnScroll(
+                  id: 'project-featured-tablet',
+                  delay: 100.ms,
+                  child: _ProjectCard(project: featured, isFeatured: true),
+                ),
+                const SizedBox(height: 20),
+                // 2-column grid for remaining projects
+                _ProjectGrid(projects: others, startIndex: 1),
+
+              // ── Mobile: single-column stack ───────────────────────────────
               ] else ...[
                 for (final (i, p) in PortfolioData.projects.indexed)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
-                    child: _ProjectCard(
-                      project: p,
-                      isFeatured: p.isFeatured,
-                    )
-                        .animate()
-                        .fadeIn(duration: 700.ms, delay: (i * 150).ms)
-                        .slideY(begin: 0.1),
+                    child: AnimateOnScroll(
+                      id: 'project-mobile-$i',
+                      delay: (i * 100).ms,
+                      child: _ProjectCard(
+                        project: p,
+                        isFeatured: p.isFeatured,
+                      ),
+                    ),
                   ),
               ],
             ],
@@ -126,7 +142,56 @@ class ProjectsSection extends StatelessWidget {
   }
 }
 
-// ─── Project Card ────────────────────────────────────────────────────────────
+// ─── 2-Column Grid (tablet) ───────────────────────────────────────────────────
+
+class _ProjectGrid extends StatelessWidget {
+  const _ProjectGrid({required this.projects, this.startIndex = 0});
+
+  final List<Project> projects;
+  final int startIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = <Widget>[];
+    for (var i = 0; i < projects.length; i += 2) {
+      final left = projects[i];
+      final right = i + 1 < projects.length ? projects[i + 1] : null;
+
+      rows.add(
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: AnimateOnScroll(
+                  id: 'project-grid-${startIndex + i}',
+                  delay: (i * 80).ms,
+                  child: _ProjectCard(project: left),
+                ),
+              ),
+              if (right != null) ...[
+                const SizedBox(width: 20),
+                Expanded(
+                  child: AnimateOnScroll(
+                    id: 'project-grid-${startIndex + i + 1}',
+                    delay: ((i + 1) * 80).ms,
+                    child: _ProjectCard(project: right),
+                  ),
+                ),
+              ] else
+                const Expanded(child: SizedBox.shrink()),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Column(children: rows);
+  }
+}
+
+// ─── Project Card ─────────────────────────────────────────────────────────────
 
 class _ProjectCard extends StatefulWidget {
   const _ProjectCard({
@@ -169,13 +234,14 @@ class _ProjectCardState extends State<_ProjectCard> {
             color: vc.glassPanel,
             border: Border(
               top: BorderSide(
-                  color: vc.electricCyan, width: AppSpacing.borderDefault),
-              left: BorderSide(
-                  color: vc.hotMagenta.withOpacity(0.3), width: 1),
-              right: BorderSide(
-                  color: vc.hotMagenta.withOpacity(0.3), width: 1),
-              bottom: BorderSide(
-                  color: vc.hotMagenta.withOpacity(0.15), width: 1),
+                color: vc.electricCyan,
+                width: AppSpacing.borderDefault,
+              ),
+              left: BorderSide(color: vc.hotMagenta.withOpacity(0.3), width: 1),
+              right:
+                  BorderSide(color: vc.hotMagenta.withOpacity(0.3), width: 1),
+              bottom:
+                  BorderSide(color: vc.hotMagenta.withOpacity(0.15), width: 1),
             ),
             boxShadow: _hovered
                 ? AppShadows.cardHover(brightness)
@@ -190,7 +256,9 @@ class _ProjectCardState extends State<_ProjectCard> {
                   if (widget.isFeatured)
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 3),
+                        horizontal: 10,
+                        vertical: 3,
+                      ),
                       color: vc.hotMagenta,
                       child: Text(
                         'FEATURED',
@@ -255,11 +323,13 @@ class _ProjectCardState extends State<_ProjectCard> {
               if (p.impact != null) ...[
                 const SizedBox(height: 12),
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: vc.electricCyan.withOpacity(0.5), width: 1),
+                      color: vc.electricCyan.withOpacity(0.5),
+                      width: 1,
+                    ),
                     color: vc.electricCyan.withOpacity(0.05),
                   ),
                   child: Text(
@@ -279,9 +349,8 @@ class _ProjectCardState extends State<_ProjectCard> {
               Wrap(
                 spacing: 8,
                 runSpacing: 6,
-                children: p.techStack
-                    .map((t) => _TechTag(label: t, vc: vc))
-                    .toList(),
+                children:
+                    p.techStack.map((t) => _TechTag(label: t, vc: vc)).toList(),
               ),
 
               const SizedBox(height: 20),
