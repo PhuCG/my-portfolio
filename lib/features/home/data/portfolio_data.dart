@@ -7,7 +7,7 @@ class PortfolioData {
     Project(
       id: 'cita',
       title: 'Cita AI',
-      role: 'Lead Flutter Developer',
+      role: 'Flutter Developer',
       description:
           'AI-powered language learning app with real-time conversation, '
           'speech recognition, and offline-first sync. '
@@ -119,7 +119,7 @@ class PortfolioData {
     Project(
       id: 'yeong',
       title: 'Yeong Coffee',
-      role: 'UI/UX Designer & Lead Developer',
+      role: 'UI/UX Designer & Developer',
       description:
           'Modern coffee ordering experience designed entirely with Figma AI '
           'for rapid prototyping, then delivered with Flutter Web '
@@ -200,7 +200,7 @@ class PortfolioData {
     ),
     TimelineEntry(
       period: '2023 — PRESENT',
-      role: 'Lead Flutter Developer',
+      role: 'Flutter Developer',
       company: 'Cita AI (Startup)',
       url: 'https://citaspeak.com/',
       description:

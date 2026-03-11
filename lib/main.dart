@@ -31,7 +31,7 @@ class PortfolioApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider);
     return MaterialApp(
-      title: 'Nguyen Trong Phu | Senior Flutter Developer',
+      title: 'Nguyen Trong Phu | Flutter Developer',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
