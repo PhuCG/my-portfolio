@@ -27,17 +27,94 @@ class PortfolioData {
       isFeatured: true,
     ),
     Project(
-      id: 'burning',
-      title: 'Burning Bros',
-      role: 'Mobile Developer',
+      id: 'ev-driver',
+      title: 'EV Driver',
+      role: 'Flutter Developer @ Burning Bros',
       description:
-          'Enterprise outsourcing projects using Flutter Web, Supabase, '
-          'and Firebase AI. Delivering production-grade multi-platform apps '
-          'for international clients.',
-      techStack: ['Flutter Web', 'Supabase', 'Firebase AI', 'Dart'],
-      url: 'https://masothue.com/0316840598-cong-ty-tnhh-burning-bros',
-      impact: 'Enterprise Scale  ·  Multiple Production Apps',
-      vaporwaveTagline: 'ENGINEERED AT WARP SPEED',
+          'Flutter mobile app for EV driver operations: real-time trip '
+          'management, BLE vehicle pairing, map/location UX, and QR-based '
+          'check-in. Integrated Shorebird OTA patches for zero-downtime '
+          'releases and Sentry for production observability.',
+      techStack: [
+        'Flutter',
+        'BLoC',
+        'Firebase',
+        'BLE',
+        'Naver Maps',
+        'Sentry',
+        'Shorebird',
+        'AutoRoute',
+      ],
+      url: '#',
+      impact: 'OTA Updates via Shorebird  ·  BLE + GPS Operations',
+      vaporwaveTagline: 'VOLTAGE ON WHEELS. DATA IN MOTION.',
+    ),
+    Project(
+      id: 'ev-ivi',
+      title: 'EV IVI',
+      role: 'Android Developer @ Burning Bros',
+      description:
+          'Android in-vehicle infotainment app built with Kotlin & Jetpack '
+          'Compose. Covers driver auth, fleet/shift selection, QR matching, '
+          'BLE advertising, live vehicle telemetry, and Firebase-driven '
+          'realtime match sync.',
+      techStack: [
+        'Kotlin',
+        'Jetpack Compose',
+        'Material 3',
+        'Koin',
+        'Firebase',
+        'Kakao Navigation',
+        'Arrow Core',
+      ],
+      url: '#',
+      impact: 'Android Native IVI  ·  Feature-Based Architecture',
+      vaporwaveTagline: 'THE COCKPIT GOES DIGITAL.',
+    ),
+    Project(
+      id: 'voice-journal',
+      title: 'Voice Journal',
+      role: 'Flutter Developer @ Burning Bros',
+      description:
+          'AI-powered voice journaling app: record thoughts, visualize '
+          'audio waveforms, and replay offline-persisted entries. '
+          'Firebase AI processes recordings; Supabase handles auth and '
+          'sync across devices.',
+      techStack: [
+        'Flutter',
+        'Firebase AI',
+        'Supabase',
+        'BLoC',
+        'Hive',
+        'FFmpeg',
+        'Clean Architecture',
+      ],
+      url: '#',
+      impact: 'AI Audio Processing  ·  Offline-First Sync',
+      vaporwaveTagline: 'YOUR THOUGHTS, IMMORTALIZED IN SOUND.',
+    ),
+    Project(
+      id: 'yeong-delivery',
+      title: 'Yeong Delivery',
+      role: 'Flutter Developer @ Burning Bros',
+      description:
+          'Group-ordering Flutter app — a host shares one link; teammates '
+          'join without installing anything, pick items, and settle the bill. '
+          'Full flows: auth, menu/cart, group orders, history, addresses, '
+          'payment. Supports VI / EN / KO localization.',
+      techStack: [
+        'Flutter',
+        'BLoC/Cubit',
+        'Freezed',
+        'AutoRoute',
+        'Dio',
+        'Hive',
+        'get_it',
+        'i18n (3 locales)',
+      ],
+      url: '#',
+      impact: 'Shareable-Link Orders  ·  3-Language Support',
+      vaporwaveTagline: 'SQUAD ORDERS. ONE LINK. ZERO CHAOS.',
     ),
     Project(
       id: 'yeong',
@@ -112,11 +189,13 @@ class PortfolioData {
       period: '2025 — PRESENT',
       role: 'Mobile Developer',
       company: 'Burning Bros',
-      url: 'https://burningbros.com/',
+      url: 'https://masothue.com/0316840598-cong-ty-tnhh-burning-bros',
       description:
-          'Building enterprise outsourcing products using Flutter Web, '
-          'Supabase, and Firebase AI. Delivering production-grade apps '
-          'for international clients across multiple industries.',
+          'Delivering production-grade outsourcing products for international '
+          'clients. Shipped an Android IVI app (Kotlin/Compose) for EV fleet '
+          'operations, a Flutter EV Driver app with BLE + Shorebird OTA, an '
+          'AI voice journal (Firebase AI + Supabase), and a group-ordering '
+          'platform with multi-language support.',
       isHighlighted: true,
     ),
     TimelineEntry(
@@ -155,7 +234,7 @@ class PortfolioData {
   static const Map<String, String> stats = {
     '4+': 'YEARS PRODUCTION EXP.',
     '5M+': 'APP DOWNLOADS',
-    '28+': 'LANGUAGES SUPPORTED',
+    '7+': 'PRODUCTION APPS SHIPPED',
     '15+': 'FEATURE MODULES SHIPPED',
   };
 
