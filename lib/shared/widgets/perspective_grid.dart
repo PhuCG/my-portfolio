@@ -50,7 +50,7 @@ class _GridPainter extends CustomPainter {
     for (int i = 1; i <= numHorizontal; i++) {
       final t = math.pow(i / numHorizontal, 2).toDouble();
       final y = t * size.height;
-      paint.color = lineColor.withOpacity(0.15 + 0.35 * t);
+      paint.color = lineColor.withValues(alpha: 0.15 + 0.35 * t);
       canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
     }
 
@@ -58,7 +58,7 @@ class _GridPainter extends CustomPainter {
     for (int i = 0; i <= numVertical; i++) {
       final t = i / numVertical;
       final startX = t * size.width;
-      paint.color = lineColor.withOpacity(0.25);
+      paint.color = lineColor.withValues(alpha: 0.25);
       canvas.drawLine(
         Offset(startX, size.height),
         Offset(vanishingX, 0),

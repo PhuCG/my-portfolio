@@ -65,19 +65,12 @@ class _PortfolioNavBarState extends ConsumerState<PortfolioNavBar> {
         height: 64,
         decoration: BoxDecoration(
           color: _isScrolled
-              ? vc.voidBackground.withOpacity(0.92)
+              ? vc.voidBackground.withValues(alpha: 0.92)
               : Colors.transparent,
           border: _isScrolled
-              ? Border(
-                  bottom: BorderSide(
-                    color: vc.defaultBorder,
-                    width: 1,
-                  ),
-                )
+              ? Border(bottom: BorderSide(color: vc.defaultBorder, width: 1))
               : null,
-          boxShadow: _isScrolled
-              ? AppShadows.cyanGlowSm
-              : null,
+          boxShadow: _isScrolled ? AppShadows.cyanGlowSm : null,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -91,8 +84,7 @@ class _PortfolioNavBarState extends ConsumerState<PortfolioNavBar> {
                   child: ShaderMask(
                     blendMode: BlendMode.srcIn,
                     shaderCallback: (b) => AppColors.accentBarGradient
-                        .createShader(
-                            Rect.fromLTWH(0, 0, b.width, b.height)),
+                        .createShader(Rect.fromLTWH(0, 0, b.width, b.height)),
                     child: Text(
                       'PHU.DEV',
                       style: AppTextStyles.cardTitleBase.copyWith(
@@ -235,11 +227,7 @@ class _HamburgerButton extends StatelessWidget {
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: onTap,
-        child: Icon(
-          isOpen ? Icons.close : Icons.menu,
-          color: color,
-          size: 24,
-        ),
+        child: Icon(isOpen ? Icons.close : Icons.menu, color: color, size: 24),
       ),
     );
   }

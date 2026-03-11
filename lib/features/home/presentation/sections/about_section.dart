@@ -30,8 +30,9 @@ class AboutSection extends StatelessWidget {
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints:
-              const BoxConstraints(maxWidth: AppSpacing.maxWidthContent),
+          constraints: const BoxConstraints(
+            maxWidth: AppSpacing.maxWidthContent,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -49,7 +50,10 @@ class AboutSection extends StatelessWidget {
                       children: [
                         Expanded(flex: 3, child: _PersonaBlock(vc: vc)),
                         const SizedBox(width: 32),
-                        Expanded(flex: 2, child: _AiEdgeBlock(vc: vc, tools: _aiTools)),
+                        Expanded(
+                          flex: 2,
+                          child: _AiEdgeBlock(vc: vc, tools: _aiTools),
+                        ),
                       ],
                     )
                   : Column(
@@ -97,10 +101,8 @@ class _PersonaBlock extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            border: Border(
-              left: BorderSide(color: vc.hotMagenta, width: 3),
-            ),
-            color: vc.hotMagenta.withOpacity(0.05),
+            border: Border(left: BorderSide(color: vc.hotMagenta, width: 3)),
+            color: vc.hotMagenta.withValues(alpha: 0.05),
           ),
           child: Text(
             '"Clean Architecture · SOLID Principles · Offline-First Reliability"',
@@ -117,10 +119,7 @@ class _PersonaBlock extends StatelessWidget {
 }
 
 class _AiEdgeBlock extends StatelessWidget {
-  const _AiEdgeBlock({
-    required this.vc,
-    required this.tools,
-  });
+  const _AiEdgeBlock({required this.vc, required this.tools});
   final VaporwaveColors vc;
   final List<(String, String)> tools;
 

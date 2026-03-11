@@ -19,87 +19,85 @@ class AppTextStyles {
   // ─── Structural (color-free) ───────────────────────────────────────────────
 
   static TextStyle get heroHeadlineBase => GoogleFonts.orbitron(
-        fontSize: 96,
-        fontWeight: FontWeight.w900,
-        letterSpacing: -2,
-        height: 1.05,
-      );
+    fontSize: 96,
+    fontWeight: FontWeight.w900,
+    letterSpacing: -2,
+    height: 1.05,
+  );
 
   static TextStyle get heroHeadlineMobile => GoogleFonts.orbitron(
-        fontSize: 48,
-        fontWeight: FontWeight.w900,
-        letterSpacing: -1,
-        height: 1.1,
-      );
+    fontSize: 48,
+    fontWeight: FontWeight.w900,
+    letterSpacing: -1,
+    height: 1.1,
+  );
 
   static TextStyle get sectionHeadingBase => GoogleFonts.orbitron(
-        fontSize: 48,
-        fontWeight: FontWeight.w700,
-        letterSpacing: 2,
-      );
+    fontSize: 48,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 2,
+  );
 
   static TextStyle get sectionHeadingMobile => GoogleFonts.orbitron(
-        fontSize: 30,
-        fontWeight: FontWeight.w700,
-        letterSpacing: 1,
-      );
+    fontSize: 30,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 1,
+  );
 
-  static TextStyle get cardTitleBase => GoogleFonts.orbitron(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-      );
+  static TextStyle get cardTitleBase =>
+      GoogleFonts.orbitron(fontSize: 24, fontWeight: FontWeight.w600);
 
   static TextStyle get bodyLargeBase => GoogleFonts.shareTechMono(
-        fontSize: 18,
-        fontWeight: FontWeight.w400,
-        height: 1.6,
-      );
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    height: 1.6,
+  );
 
   static TextStyle get bodyMediumBase => GoogleFonts.shareTechMono(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        height: 1.5,
-      );
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    height: 1.5,
+  );
 
   static TextStyle get uiLabelBase => GoogleFonts.shareTechMono(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 2,
-        textBaseline: TextBaseline.alphabetic,
-      );
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 2,
+    textBaseline: TextBaseline.alphabetic,
+  );
 
   static TextStyle get buttonLabelBase => GoogleFonts.shareTechMono(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 3,
-      );
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 3,
+  );
 
   static TextStyle get captionBase => GoogleFonts.shareTechMono(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 1,
-      );
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 1,
+  );
 
   static TextStyle get terminalPromptBase => GoogleFonts.shareTechMono(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 1.5,
-        height: 1.8,
-      );
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 1.5,
+    height: 1.8,
+  );
 
   // ─── Semantic helpers ──────────────────────────────────────────────────────
 
   /// Card title in Electric Cyan with soft glow (always same regardless of mode).
   static TextStyle cardTitleCyan(Color electricCyan) => cardTitleBase.copyWith(
-        color: electricCyan,
-        shadows: [
-          Shadow(
-            color: electricCyan.withOpacity(0.8),
-            offset: Offset.zero,
-            blurRadius: 5,
-          ),
-        ],
-      );
+    color: electricCyan,
+    shadows: [
+      Shadow(
+        color: electricCyan.withValues(alpha: 0.8),
+        offset: Offset.zero,
+        blurRadius: 5,
+      ),
+    ],
+  );
 
   /// Section heading in Hot Magenta — used for named section labels.
   static TextStyle sectionHeadingMagenta(Color hotMagenta) =>
@@ -107,16 +105,12 @@ class AppTextStyles {
 
   /// Hero headline with dual-layer glow (dark mode optimized).
   static TextStyle heroWithGlow(Color baseColor) => heroHeadlineBase.copyWith(
-        color: baseColor,
-        shadows: AppShadows.headlineGlowDark,
-      );
+    color: baseColor,
+    shadows: AppShadows.headlineGlowDark,
+  );
 
   /// Apply a single neon glow to any style.
-  static TextStyle withGlow(
-    TextStyle style,
-    Color color, {
-    double blur = 10,
-  }) =>
+  static TextStyle withGlow(TextStyle style, Color color, {double blur = 10}) =>
       style.copyWith(
         shadows: [Shadow(color: color, offset: Offset.zero, blurRadius: blur)],
       );
@@ -126,13 +120,15 @@ class AppTextStyles {
       style.copyWith(
         shadows: [
           Shadow(
-              color: color.withOpacity(0.8),
-              offset: Offset.zero,
-              blurRadius: 10),
+            color: color.withValues(alpha: 0.8),
+            offset: Offset.zero,
+            blurRadius: 10,
+          ),
           Shadow(
-              color: color.withOpacity(0.4),
-              offset: Offset.zero,
-              blurRadius: 30),
+            color: color.withValues(alpha: 0.4),
+            offset: Offset.zero,
+            blurRadius: 30,
+          ),
         ],
       );
 }

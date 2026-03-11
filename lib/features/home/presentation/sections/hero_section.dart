@@ -43,8 +43,8 @@ class HeroSection extends StatelessWidget {
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
                     colors: [
-                      vc.floatingSunFrom.withOpacity(0.25),
-                      vc.floatingSunTo.withOpacity(0.15),
+                      vc.floatingSunFrom.withValues(alpha: 0.25),
+                      vc.floatingSunTo.withValues(alpha: 0.15),
                       Colors.transparent,
                     ],
                     stops: const [0.0, 0.5, 1.0],
@@ -65,8 +65,9 @@ class HeroSection extends StatelessWidget {
           // ── Main content ─────────────────────────────────
           Center(
             child: ConstrainedBox(
-              constraints:
-                  const BoxConstraints(maxWidth: AppSpacing.maxWidthHero),
+              constraints: const BoxConstraints(
+                maxWidth: AppSpacing.maxWidthHero,
+              ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
@@ -80,13 +81,13 @@ class HeroSection extends StatelessWidget {
                   children: [
                     // Eyebrow label
                     Text(
-                      '>_ FLUTTER DEVELOPER',
-                      style: AppTextStyles.uiLabelBase.copyWith(
-                        color: vc.electricCyan,
-                        fontSize: 13,
-                        letterSpacing: 4,
-                      ),
-                    )
+                          '>_ FLUTTER DEVELOPER',
+                          style: AppTextStyles.uiLabelBase.copyWith(
+                            color: vc.electricCyan,
+                            fontSize: 13,
+                            letterSpacing: 4,
+                          ),
+                        )
                         .animate()
                         .fadeIn(duration: 600.ms, delay: 100.ms)
                         .slideY(begin: 0.3, duration: 500.ms),
@@ -95,12 +96,14 @@ class HeroSection extends StatelessWidget {
 
                     // Hero name — gradient fill
                     GradientText(
-                      'PHU\nNGUYEN',
-                      style: isDesktop
-                          ? AppTextStyles.heroHeadlineBase
-                          : AppTextStyles.heroHeadlineMobile,
-                      textAlign: isDesktop ? TextAlign.left : TextAlign.center,
-                    )
+                          'PHU\nNGUYEN',
+                          style: isDesktop
+                              ? AppTextStyles.heroHeadlineBase
+                              : AppTextStyles.heroHeadlineMobile,
+                          textAlign: isDesktop
+                              ? TextAlign.left
+                              : TextAlign.center,
+                        )
                         .animate()
                         .fadeIn(duration: 800.ms, delay: 300.ms)
                         .slideY(begin: 0.2, duration: 700.ms),
@@ -116,11 +119,8 @@ class HeroSection extends StatelessWidget {
                         height: 1.7,
                         shadows: AppShadows.cyanTextGlow,
                       ),
-                      textAlign:
-                          isDesktop ? TextAlign.left : TextAlign.center,
-                    )
-                        .animate()
-                        .fadeIn(duration: 600.ms, delay: 600.ms),
+                      textAlign: isDesktop ? TextAlign.left : TextAlign.center,
+                    ).animate().fadeIn(duration: 600.ms, delay: 600.ms),
 
                     const SizedBox(height: 16),
 
@@ -133,12 +133,11 @@ class HeroSection extends StatelessWidget {
                           color: vc.mutedText,
                           fontStyle: FontStyle.italic,
                         ),
-                        textAlign:
-                            isDesktop ? TextAlign.left : TextAlign.center,
+                        textAlign: isDesktop
+                            ? TextAlign.left
+                            : TextAlign.center,
                       ),
-                    )
-                        .animate()
-                        .fadeIn(duration: 600.ms, delay: 800.ms),
+                    ).animate().fadeIn(duration: 600.ms, delay: 800.ms),
 
                     const SizedBox(height: 40),
 
@@ -166,19 +165,15 @@ class HeroSection extends StatelessWidget {
                         VaporButton(
                           label: 'DOWNLOAD CV',
                           variant: VaporButtonVariant.secondary,
-                          onPressed: () =>
-                              _launch('mailto:abc@gmail.com'),
+                          onPressed: () => _launch('mailto:abc@gmail.com'),
                         ),
                         VaporButton(
                           label: 'GITHUB →',
                           variant: VaporButtonVariant.ghost,
-                          onPressed: () =>
-                              _launch(PortfolioData.githubUrl),
+                          onPressed: () => _launch(PortfolioData.githubUrl),
                         ),
                       ],
-                    )
-                        .animate()
-                        .fadeIn(duration: 600.ms, delay: 1100.ms),
+                    ).animate().fadeIn(duration: 600.ms, delay: 1100.ms),
                   ],
                 ),
               ),
@@ -201,16 +196,17 @@ class HeroSection extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Icon(
-                  Icons.keyboard_arrow_down,
-                  color: vc.electricCyan,
-                  size: 20,
-                )
+                      Icons.keyboard_arrow_down,
+                      color: vc.electricCyan,
+                      size: 20,
+                    )
                     .animate(onPlay: (c) => c.repeat())
                     .moveY(
-                        begin: 0,
-                        end: 6,
-                        duration: 1200.ms,
-                        curve: Curves.easeInOut)
+                      begin: 0,
+                      end: 6,
+                      duration: 1200.ms,
+                      curve: Curves.easeInOut,
+                    )
                     .then()
                     .moveY(begin: 6, end: 0, duration: 1200.ms),
               ],
@@ -223,10 +219,7 @@ class HeroSection extends StatelessWidget {
 }
 
 class _StatsRow extends StatelessWidget {
-  const _StatsRow({
-    required this.stats,
-    required this.isDesktop,
-  });
+  const _StatsRow({required this.stats, required this.isDesktop});
 
   final Map<String, String> stats;
   final bool isDesktop;
@@ -255,8 +248,7 @@ class _StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final vc = context.vaporColors;
     return Container(
-      padding:
-          const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
         color: vc.glassPanel,
         border: Border(
@@ -271,8 +263,9 @@ class _StatCard extends StatelessWidget {
         children: [
           ShaderMask(
             blendMode: BlendMode.srcIn,
-            shaderCallback: (b) => AppColors.sunsetGradient
-                .createShader(Rect.fromLTWH(0, 0, b.width, b.height)),
+            shaderCallback: (b) => AppColors.sunsetGradient.createShader(
+              Rect.fromLTWH(0, 0, b.width, b.height),
+            ),
             child: Text(
               value,
               style: AppTextStyles.sectionHeadingBase.copyWith(

@@ -32,7 +32,7 @@ class ContactSection extends StatelessWidget {
         color: vc.voidBackground,
         boxShadow: [
           BoxShadow(
-            color: vc.hotMagenta.withOpacity(0.08),
+            color: vc.hotMagenta.withValues(alpha: 0.08),
             blurRadius: 100,
             offset: const Offset(0, -40),
           ),
@@ -40,15 +40,17 @@ class ContactSection extends StatelessWidget {
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints:
-              const BoxConstraints(maxWidth: AppSpacing.maxWidthNarrow),
+          constraints: const BoxConstraints(
+            maxWidth: AppSpacing.maxWidthNarrow,
+          ),
           child: Column(
             children: [
               // Section intro
               ShaderMask(
                 blendMode: BlendMode.srcIn,
-                shaderCallback: (b) => AppColors.sunsetGradient
-                    .createShader(Rect.fromLTWH(0, 0, b.width, b.height)),
+                shaderCallback: (b) => AppColors.sunsetGradient.createShader(
+                  Rect.fromLTWH(0, 0, b.width, b.height),
+                ),
                 child: Text(
                   "LET'S BUILD\nTHE FUTURE",
                   textAlign: TextAlign.center,
@@ -58,10 +60,7 @@ class ContactSection extends StatelessWidget {
                     height: 1.1,
                   ),
                 ),
-              )
-                  .animate()
-                  .fadeIn(duration: 700.ms)
-                  .slideY(begin: 0.2),
+              ).animate().fadeIn(duration: 700.ms).slideY(begin: 0.2),
 
               const SizedBox(height: 20),
 
@@ -77,54 +76,55 @@ class ContactSection extends StatelessWidget {
 
               // Terminal CTA card
               TerminalWindow(
-                title: 'CONNECT.SH',
-                statusText: '> Ready to deploy on the next mission',
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Terminal prompt lines
-                    _PromptLine(
-                      prompt: '~',
-                      command: 'ping phu@burningbros.com',
-                      vc: vc,
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'PONG — Response time: < 24h',
-                      style: AppTextStyles.terminalPromptBase.copyWith(
-                        color: vc.electricCyan,
-                        shadows: AppShadows.cyanTextGlow,
-                        fontSize: 14,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-
-                    // CTA Buttons
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 12,
-                      alignment: WrapAlignment.center,
+                    title: 'CONNECT.SH',
+                    statusText: '> Ready to deploy on the next mission',
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        VaporButton(
-                          label: 'SEND EMAIL',
-                          variant: VaporButtonVariant.primary,
-                          onPressed: () => _launch(PortfolioData.email),
+                        // Terminal prompt lines
+                        _PromptLine(
+                          prompt: '~',
+                          command: 'ping phu@burningbros.com',
+                          vc: vc,
                         ),
-                        VaporButton(
-                          label: 'GITHUB',
-                          variant: VaporButtonVariant.outline,
-                          onPressed: () => _launch(PortfolioData.githubUrl),
+                        const SizedBox(height: 6),
+                        Text(
+                          'PONG — Response time: < 24h',
+                          style: AppTextStyles.terminalPromptBase.copyWith(
+                            color: vc.electricCyan,
+                            shadows: AppShadows.cyanTextGlow,
+                            fontSize: 14,
+                          ),
                         ),
-                        VaporButton(
-                          label: 'LINKEDIN',
-                          variant: VaporButtonVariant.ghost,
-                          onPressed: () => _launch(PortfolioData.linkedinUrl),
+                        const SizedBox(height: 24),
+
+                        // CTA Buttons
+                        Wrap(
+                          spacing: 16,
+                          runSpacing: 12,
+                          alignment: WrapAlignment.center,
+                          children: [
+                            VaporButton(
+                              label: 'SEND EMAIL',
+                              variant: VaporButtonVariant.primary,
+                              onPressed: () => _launch(PortfolioData.email),
+                            ),
+                            VaporButton(
+                              label: 'GITHUB',
+                              variant: VaporButtonVariant.outline,
+                              onPressed: () => _launch(PortfolioData.githubUrl),
+                            ),
+                            VaporButton(
+                              label: 'LINKEDIN',
+                              variant: VaporButtonVariant.ghost,
+                              onPressed: () =>
+                                  _launch(PortfolioData.linkedinUrl),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              )
+                  )
                   .animate()
                   .fadeIn(duration: 700.ms, delay: 400.ms)
                   .slideY(begin: 0.15),
@@ -193,8 +193,9 @@ class _Footer extends StatelessWidget {
           children: [
             ShaderMask(
               blendMode: BlendMode.srcIn,
-              shaderCallback: (b) => AppColors.accentBarGradient
-                  .createShader(Rect.fromLTWH(0, 0, b.width, b.height)),
+              shaderCallback: (b) => AppColors.accentBarGradient.createShader(
+                Rect.fromLTWH(0, 0, b.width, b.height),
+              ),
               child: Text(
                 'PHU.DEV',
                 style: AppTextStyles.uiLabelBase.copyWith(
@@ -206,9 +207,7 @@ class _Footer extends StatelessWidget {
             ),
             Text(
               '< NGUYEN TRONG PHU / 2025 >',
-              style: AppTextStyles.captionBase.copyWith(
-                color: vc.mutedText,
-              ),
+              style: AppTextStyles.captionBase.copyWith(color: vc.mutedText),
             ),
           ],
         ),

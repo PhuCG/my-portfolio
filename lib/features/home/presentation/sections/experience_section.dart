@@ -16,7 +16,8 @@ class ExperienceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vc = context.vaporColors;
-    final isDesktop = MediaQuery.sizeOf(context).width >= AppSpacing.breakpointLg;
+    final isDesktop =
+        MediaQuery.sizeOf(context).width >= AppSpacing.breakpointLg;
 
     return Container(
       width: double.infinity,
@@ -29,8 +30,9 @@ class ExperienceSection extends StatelessWidget {
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints:
-              const BoxConstraints(maxWidth: AppSpacing.maxWidthNarrow),
+          constraints: const BoxConstraints(
+            maxWidth: AppSpacing.maxWidthNarrow,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -97,13 +99,14 @@ class _TimelineItemState extends State<_TimelineItem> {
     final railGap = widget.isDesktop ? 16.0 : 12.0;
     final dotSize = widget.isDesktop ? 14.0 : 12.0;
 
-    final dotColor =
-        widget.entry.isHighlighted ? vc.hotMagenta : vc.electricCyan;
+    final dotColor = widget.entry.isHighlighted
+        ? vc.hotMagenta
+        : vc.electricCyan;
     final dotGlow = widget.entry.isHighlighted
         ? AppShadows.magentaGlowSm
         : AppShadows.cyanGlowSm;
     final lineColor = widget.entry.isHighlighted
-        ? vc.hotMagenta.withOpacity(0.4)
+        ? vc.hotMagenta.withValues(alpha: 0.4)
         : vc.defaultBorder;
 
     return Padding(
@@ -136,7 +139,10 @@ class _TimelineItemState extends State<_TimelineItem> {
                             gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [lineColor, lineColor.withOpacity(0.2)],
+                              colors: [
+                                lineColor,
+                                lineColor.withValues(alpha: 0.2),
+                              ],
                             ),
                           ),
                         ),
@@ -167,11 +173,11 @@ class _TimelineItemState extends State<_TimelineItem> {
                         border: Border(
                           left: BorderSide(
                             color: widget.entry.isHighlighted
-                                ? vc.hotMagenta.withOpacity(
-                                    _hovered ? 1.0 : 0.6,
+                                ? vc.hotMagenta.withValues(
+                                    alpha: _hovered ? 1.0 : 0.6,
                                   )
-                                : vc.defaultBorder.withOpacity(
-                                    _hovered ? 0.8 : 0.4,
+                                : vc.defaultBorder.withValues(
+                                    alpha: _hovered ? 0.8 : 0.4,
                                   ),
                             width: _hovered ? 2 : 1,
                           ),
@@ -232,7 +238,7 @@ class _TimelineItemState extends State<_TimelineItem> {
                                 const SizedBox(width: 6),
                                 Icon(
                                   Icons.open_in_new,
-                                  color: vc.electricCyan.withOpacity(0.6),
+                                  color: vc.electricCyan.withValues(alpha: 0.6),
                                   size: 13,
                                 ),
                               ],
@@ -295,9 +301,10 @@ class _AnimatedDotState extends State<_AnimatedDot>
       duration: const Duration(milliseconds: 1800),
     );
 
-    _glowScale = Tween<double>(begin: 0.6, end: 1.4).animate(
-      CurvedAnimation(parent: _pulse, curve: Curves.easeInOut),
-    );
+    _glowScale = Tween<double>(
+      begin: 0.6,
+      end: 1.4,
+    ).animate(CurvedAnimation(parent: _pulse, curve: Curves.easeInOut));
 
     if (widget.isHighlighted) {
       _pulse.repeat(reverse: true);
@@ -324,15 +331,15 @@ class _AnimatedDotState extends State<_AnimatedDot>
             shape: BoxShape.rectangle,
             boxShadow: widget.isHighlighted
                 ? widget.glow
-                    .map(
-                      (s) => BoxShadow(
-                        color: s.color,
-                        blurRadius: s.blurRadius * _glowScale.value,
-                        spreadRadius: s.spreadRadius * _glowScale.value,
-                        offset: s.offset,
-                      ),
-                    )
-                    .toList()
+                      .map(
+                        (s) => BoxShadow(
+                          color: s.color,
+                          blurRadius: s.blurRadius * _glowScale.value,
+                          spreadRadius: s.spreadRadius * _glowScale.value,
+                          offset: s.offset,
+                        ),
+                      )
+                      .toList()
                 : widget.glow,
           ),
         );

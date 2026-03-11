@@ -56,22 +56,28 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: vc.cardBackground,
         elevation: 0,
-        shadowColor: vc.hotMagenta.withOpacity(0.3),
+        shadowColor: vc.hotMagenta.withValues(alpha: 0.3),
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.zero,
-          side: BorderSide(color: vc.hotMagenta.withOpacity(0.3), width: 1),
+          side: BorderSide(
+            color: vc.hotMagenta.withValues(alpha: 0.3),
+            width: 1,
+          ),
         ),
       ),
 
       // ─── Text Theme ─────────────────────────────────────────────────────
       textTheme: TextTheme(
-        displayLarge: AppTextStyles.heroHeadlineBase
-            .copyWith(color: vc.chromeText),
-        displayMedium: AppTextStyles.sectionHeadingBase
-            .copyWith(color: vc.hotMagenta),
-        displaySmall: AppTextStyles.sectionHeadingMobile
-            .copyWith(color: vc.hotMagenta),
+        displayLarge: AppTextStyles.heroHeadlineBase.copyWith(
+          color: vc.chromeText,
+        ),
+        displayMedium: AppTextStyles.sectionHeadingBase.copyWith(
+          color: vc.hotMagenta,
+        ),
+        displaySmall: AppTextStyles.sectionHeadingMobile.copyWith(
+          color: vc.hotMagenta,
+        ),
         titleLarge: AppTextStyles.cardTitleCyan(vc.electricCyan),
         titleMedium: AppTextStyles.uiLabelBase.copyWith(
           fontSize: 18,
@@ -80,7 +86,9 @@ class AppTheme {
         bodyLarge: AppTextStyles.bodyLargeBase.copyWith(color: vc.chromeText),
         bodyMedium: AppTextStyles.bodyMediumBase.copyWith(color: vc.mutedText),
         labelLarge: AppTextStyles.uiLabelBase.copyWith(color: vc.chromeText),
-        labelMedium: AppTextStyles.buttonLabelBase.copyWith(color: vc.chromeText),
+        labelMedium: AppTextStyles.buttonLabelBase.copyWith(
+          color: vc.chromeText,
+        ),
         labelSmall: AppTextStyles.captionBase.copyWith(color: vc.mutedText),
       ),
 
@@ -101,8 +109,10 @@ class AppTheme {
       // ─── Input Decoration — Terminal Style (underline only) ─────────────
       inputDecorationTheme: InputDecorationTheme(
         filled: false,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 10,
+        ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: vc.hotMagenta, width: 2),
         ),
@@ -113,26 +123,19 @@ class AppTheme {
           borderSide: BorderSide(color: Color(0xFFFF4444), width: 2),
         ),
         hintStyle: AppTextStyles.uiLabelBase.copyWith(
-          color: vc.hotMagenta.withOpacity(0.5),
+          color: vc.hotMagenta.withValues(alpha: 0.5),
         ),
-        labelStyle:
-            AppTextStyles.uiLabelBase.copyWith(color: vc.hotMagenta),
+        labelStyle: AppTextStyles.uiLabelBase.copyWith(color: vc.hotMagenta),
         errorStyle: AppTextStyles.captionBase.copyWith(
           color: const Color(0xFFFF4444),
         ),
       ),
 
       // ─── Divider ────────────────────────────────────────────────────────
-      dividerTheme: DividerThemeData(
-        color: vc.defaultBorder,
-        thickness: 1,
-      ),
+      dividerTheme: DividerThemeData(color: vc.defaultBorder, thickness: 1),
 
       // ─── Icon Theme ─────────────────────────────────────────────────────
-      iconTheme: IconThemeData(
-        color: vc.electricCyan,
-        size: 24,
-      ),
+      iconTheme: IconThemeData(color: vc.electricCyan, size: 24),
 
       // ─── Tooltip ────────────────────────────────────────────────────────
       tooltipTheme: TooltipThemeData(

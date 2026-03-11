@@ -18,9 +18,10 @@ class ProjectsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final vc = context.vaporColors;
     final width = MediaQuery.sizeOf(context).width;
-    final isDesktop = width >= AppSpacing.breakpointLg;   // ≥ 1024
-    final isTablet = width >= AppSpacing.breakpointMd &&
-        width < AppSpacing.breakpointLg;                  // 768 – 1023
+    final isDesktop = width >= AppSpacing.breakpointLg; // ≥ 1024
+    final isTablet =
+        width >= AppSpacing.breakpointMd &&
+        width < AppSpacing.breakpointLg; // 768 – 1023
 
     final featured = PortfolioData.projects.where((p) => p.isFeatured).first;
     final others = PortfolioData.projects.where((p) => !p.isFeatured).toList();
@@ -36,8 +37,9 @@ class ProjectsSection extends StatelessWidget {
       color: vc.voidBackground,
       child: Center(
         child: ConstrainedBox(
-          constraints:
-              const BoxConstraints(maxWidth: AppSpacing.maxWidthContent),
+          constraints: const BoxConstraints(
+            maxWidth: AppSpacing.maxWidthContent,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -108,7 +110,7 @@ class ProjectsSection extends StatelessWidget {
                   ),
                 ],
 
-              // ── Tablet: featured full-width + 2-col grid below ───────────
+                // ── Tablet: featured full-width + 2-col grid below ───────────
               ] else if (isTablet) ...[
                 AnimateOnScroll(
                   id: 'project-featured-tablet',
@@ -119,7 +121,7 @@ class ProjectsSection extends StatelessWidget {
                 // 2-column grid for remaining projects
                 _ProjectGrid(projects: others, startIndex: 1),
 
-              // ── Mobile: single-column stack ───────────────────────────────
+                // ── Mobile: single-column stack ───────────────────────────────
               ] else ...[
                 for (final (i, p) in PortfolioData.projects.indexed)
                   Padding(
@@ -127,10 +129,7 @@ class ProjectsSection extends StatelessWidget {
                     child: AnimateOnScroll(
                       id: 'project-mobile-$i',
                       delay: (i * 100).ms,
-                      child: _ProjectCard(
-                        project: p,
-                        isFeatured: p.isFeatured,
-                      ),
+                      child: _ProjectCard(project: p, isFeatured: p.isFeatured),
                     ),
                   ),
               ],
@@ -194,10 +193,7 @@ class _ProjectGrid extends StatelessWidget {
 // ─── Project Card ─────────────────────────────────────────────────────────────
 
 class _ProjectCard extends StatefulWidget {
-  const _ProjectCard({
-    required this.project,
-    this.isFeatured = false,
-  });
+  const _ProjectCard({required this.project, this.isFeatured = false});
 
   final Project project;
   final bool isFeatured;
@@ -237,11 +233,18 @@ class _ProjectCardState extends State<_ProjectCard> {
                 color: vc.electricCyan,
                 width: AppSpacing.borderDefault,
               ),
-              left: BorderSide(color: vc.hotMagenta.withOpacity(0.3), width: 1),
-              right:
-                  BorderSide(color: vc.hotMagenta.withOpacity(0.3), width: 1),
-              bottom:
-                  BorderSide(color: vc.hotMagenta.withOpacity(0.15), width: 1),
+              left: BorderSide(
+                color: vc.hotMagenta.withValues(alpha: 0.3),
+                width: 1,
+              ),
+              right: BorderSide(
+                color: vc.hotMagenta.withValues(alpha: 0.3),
+                width: 1,
+              ),
+              bottom: BorderSide(
+                color: vc.hotMagenta.withValues(alpha: 0.15),
+                width: 1,
+              ),
             ),
             boxShadow: _hovered
                 ? AppShadows.cardHover(brightness)
@@ -323,14 +326,16 @@ class _ProjectCardState extends State<_ProjectCard> {
               if (p.impact != null) ...[
                 const SizedBox(height: 12),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: vc.electricCyan.withOpacity(0.5),
+                      color: vc.electricCyan.withValues(alpha: 0.5),
                       width: 1,
                     ),
-                    color: vc.electricCyan.withOpacity(0.05),
+                    color: vc.electricCyan.withValues(alpha: 0.05),
                   ),
                   child: Text(
                     p.impact!,
@@ -349,8 +354,9 @@ class _ProjectCardState extends State<_ProjectCard> {
               Wrap(
                 spacing: 8,
                 runSpacing: 6,
-                children:
-                    p.techStack.map((t) => _TechTag(label: t, vc: vc)).toList(),
+                children: p.techStack
+                    .map((t) => _TechTag(label: t, vc: vc))
+                    .toList(),
               ),
 
               const SizedBox(height: 20),
@@ -358,8 +364,9 @@ class _ProjectCardState extends State<_ProjectCard> {
               // CTA
               ShaderMask(
                 blendMode: BlendMode.srcIn,
-                shaderCallback: (b) => AppColors.accentBarGradient
-                    .createShader(Rect.fromLTWH(0, 0, b.width, b.height)),
+                shaderCallback: (b) => AppColors.accentBarGradient.createShader(
+                  Rect.fromLTWH(0, 0, b.width, b.height),
+                ),
                 child: Text(
                   'VISIT SITE →',
                   style: AppTextStyles.buttonLabelBase.copyWith(

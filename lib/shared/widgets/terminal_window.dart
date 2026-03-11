@@ -36,13 +36,10 @@ class TerminalWindow extends StatelessWidget {
         children: [
           // ── Title bar ───────────────────────────────────────
           Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              color: accentColor.withOpacity(0.1),
-              border: Border(
-                bottom: BorderSide(color: accentColor, width: 1),
-              ),
+              color: accentColor.withValues(alpha: 0.1),
+              border: Border(bottom: BorderSide(color: accentColor, width: 1)),
             ),
             child: Row(
               children: [
@@ -67,27 +64,24 @@ class TerminalWindow extends StatelessWidget {
           ),
 
           // ── Content ─────────────────────────────────────────
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: child,
-          ),
+          Padding(padding: const EdgeInsets.all(20), child: child),
 
           // ── Optional status bar ──────────────────────────────
           if (statusText != null)
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               decoration: BoxDecoration(
                 color: vc.voidBackground,
                 border: Border(
-                  top: BorderSide(color: accentColor.withOpacity(0.3), width: 1),
+                  top: BorderSide(
+                    color: accentColor.withValues(alpha: 0.3),
+                    width: 1,
+                  ),
                 ),
               ),
               child: Text(
                 statusText!,
-                style: AppTextStyles.captionBase.copyWith(
-                  color: vc.mutedText,
-                ),
+                style: AppTextStyles.captionBase.copyWith(color: vc.mutedText),
               ),
             ),
         ],
@@ -96,14 +90,14 @@ class TerminalWindow extends StatelessWidget {
   }
 
   Widget _dot(Color color) => Container(
-        width: 12,
-        height: 12,
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(color: color.withOpacity(0.6), blurRadius: 4),
-          ],
-        ),
-      );
+    width: 12,
+    height: 12,
+    decoration: BoxDecoration(
+      color: color,
+      shape: BoxShape.circle,
+      boxShadow: [
+        BoxShadow(color: color.withValues(alpha: 0.6), blurRadius: 4),
+      ],
+    ),
+  );
 }

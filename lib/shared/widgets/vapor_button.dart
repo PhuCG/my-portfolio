@@ -35,24 +35,22 @@ class _VaporButtonState extends State<VaporButton> {
   bool _isHovered = false;
 
   double get _height => switch (widget.size) {
-        VaporButtonSize.sm => AppSpacing.buttonHeightSm,
-        VaporButtonSize.md => AppSpacing.buttonHeightMd,
-        VaporButtonSize.lg => AppSpacing.buttonHeightLg,
-      };
+    VaporButtonSize.sm => AppSpacing.buttonHeightSm,
+    VaporButtonSize.md => AppSpacing.buttonHeightMd,
+    VaporButtonSize.lg => AppSpacing.buttonHeightLg,
+  };
 
   Color _accentColor(VaporwaveColors vc) => switch (widget.variant) {
-        VaporButtonVariant.primary => vc.electricCyan,
-        VaporButtonVariant.secondary => vc.hotMagenta,
-        VaporButtonVariant.outline => vc.hotMagenta,
-        VaporButtonVariant.ghost => vc.chromeText,
-      };
+    VaporButtonVariant.primary => vc.electricCyan,
+    VaporButtonVariant.secondary => vc.hotMagenta,
+    VaporButtonVariant.outline => vc.hotMagenta,
+    VaporButtonVariant.ghost => vc.chromeText,
+  };
 
-  List<BoxShadow> _glowShadow(
-    VaporwaveColors vc,
-    Brightness brightness,
-  ) {
+  List<BoxShadow> _glowShadow(VaporwaveColors vc, Brightness brightness) {
     if (!_isHovered) return [];
-    final isMagenta = widget.variant == VaporButtonVariant.secondary ||
+    final isMagenta =
+        widget.variant == VaporButtonVariant.secondary ||
         widget.variant == VaporButtonVariant.outline;
     return isMagenta
         ? AppShadows.magentaHover(brightness)
@@ -82,10 +80,12 @@ class _VaporButtonState extends State<VaporButton> {
           transform: Matrix4.skewX(_isHovered ? 0 : -0.2),
           decoration: BoxDecoration(
             color: isGhost
-                ? (_isHovered ? vc.electricCyan.withOpacity(0.1) : Colors.transparent)
+                ? (_isHovered
+                      ? vc.electricCyan.withValues(alpha: 0.1)
+                      : Colors.transparent)
                 : isFilled
-                    ? (_isHovered ? accent.withOpacity(0.8) : accent)
-                    : (_isHovered ? accent : Colors.transparent),
+                ? (_isHovered ? accent.withValues(alpha: 0.8) : accent)
+                : (_isHovered ? accent : Colors.transparent),
             border: isGhost
                 ? null
                 : Border.all(color: accent, width: AppSpacing.borderDefault),
@@ -102,8 +102,8 @@ class _VaporButtonState extends State<VaporButton> {
                   color: _isHovered && !isFilled
                       ? (isGhost ? vc.electricCyan : Colors.black)
                       : isFilled
-                          ? Colors.white
-                          : accent,
+                      ? Colors.white
+                      : accent,
                 ),
               ),
             ),

@@ -38,10 +38,15 @@ class _NeonCardState extends State<NeonCard> {
     final topColor = widget.topAccentColor ?? vc.electricCyan;
 
     return MouseRegion(
-      onEnter: widget.isHoverable ? (_) => setState(() => _hovered = true) : null,
-      onExit: widget.isHoverable ? (_) => setState(() => _hovered = false) : null,
-      cursor:
-          widget.onTap != null ? SystemMouseCursors.click : MouseCursor.defer,
+      onEnter: widget.isHoverable
+          ? (_) => setState(() => _hovered = true)
+          : null,
+      onExit: widget.isHoverable
+          ? (_) => setState(() => _hovered = false)
+          : null,
+      cursor: widget.onTap != null
+          ? SystemMouseCursors.click
+          : MouseCursor.defer,
       child: GestureDetector(
         onTap: widget.onTap,
         child: AnimatedContainer(
@@ -54,14 +59,17 @@ class _NeonCardState extends State<NeonCard> {
             border: Border(
               top: BorderSide(color: topColor, width: AppSpacing.borderDefault),
               left: BorderSide(
-                  color: vc.hotMagenta.withOpacity(0.3),
-                  width: 1),
+                color: vc.hotMagenta.withValues(alpha: 0.3),
+                width: 1,
+              ),
               right: BorderSide(
-                  color: vc.hotMagenta.withOpacity(0.3),
-                  width: 1),
+                color: vc.hotMagenta.withValues(alpha: 0.3),
+                width: 1,
+              ),
               bottom: BorderSide(
-                  color: vc.hotMagenta.withOpacity(0.15),
-                  width: 1),
+                color: vc.hotMagenta.withValues(alpha: 0.15),
+                width: 1,
+              ),
             ),
             boxShadow: _hovered
                 ? AppShadows.cardHover(brightness)
