@@ -25,10 +25,16 @@ class HeroSection extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     final isDesktop = size.width >= 1024;
 
-    return SizedBox(
-      width: double.infinity,
-      height: size.height,
-      child: Stack(
+    // Use minHeight instead of fixed height so content can grow on small
+    // viewports rather than overflowing. On normal screens the hero still
+    // fills 100vh because of the minHeight constraint.
+    final verticalPad = size.height < 700 ? 40.0 : 80.0;
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(minHeight: size.height),
+      child: SizedBox(
+        width: double.infinity,
+        child: Stack(
         children: [
           // ── Floating sun orb ─────────────────────────────
           Positioned(
@@ -69,9 +75,9 @@ class HeroSection extends StatelessWidget {
                 maxWidth: AppSpacing.maxWidthHero,
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                   horizontal: 24,
-                  vertical: 80,
+                  vertical: verticalPad,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +145,7 @@ class HeroSection extends StatelessWidget {
                       ),
                     ).animate().fadeIn(duration: 600.ms, delay: 800.ms),
 
-                    const SizedBox(height: 40),
+                    SizedBox(height: size.height < 700 ? 20 : 40),
 
                     // Stats row
                     _StatsRow(stats: PortfolioData.stats, isDesktop: isDesktop)
@@ -147,7 +153,7 @@ class HeroSection extends StatelessWidget {
                         .fadeIn(duration: 600.ms, delay: 900.ms)
                         .slideY(begin: 0.2),
 
-                    const SizedBox(height: 40),
+                    SizedBox(height: size.height < 700 ? 20 : 40),
 
                     // CTA buttons
                     Wrap(
@@ -213,6 +219,7 @@ class HeroSection extends StatelessWidget {
             ),
           ),
         ],
+        ),
       ),
     );
   }
