@@ -49,4 +49,5 @@ app.*.map.json
 .agents/
 .claude/
 .cursor/
-.docs/.flutter_sdk/
+.docs/
+.flutter_sdk/
