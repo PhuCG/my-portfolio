@@ -1,0 +1,81 @@
+name: Build & Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read Flutter version from .fvmrc
+        id: fvm
+        run: |
+          echo "version=$(python3 -c "import json; print(json.load(open('.fvmrc'))['flutter'])")" >> $GITHUB_OUTPUT
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.fvm.outputs.version }}
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Flutter Web
+        run: flutter build web --release
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Prepare Vercel Build Output (Build Output API v3)
+        run: |
+          mkdir -p .vercel/output/static
+          cp -r build/web/. .vercel/output/static/
+
+          cat > .vercel/output/config.json << 'EOF'
+          {
+            "version": 3,
+            "routes": [
+              {
+                "src": "/assets/(.*)",
+                "headers": { "cache-control": "public, max-age=31536000, immutable" },
+                "continue": true
+              },
+              {
+                "src": "/(.*)\\.wasm",
+                "headers": {
+                  "content-type": "application/wasm",
+                  "cache-control": "public, max-age=31536000, immutable"
+                },
+                "continue": true
+              },
+              {
+                "src": "/flutter.js",
+                "headers": { "cache-control": "public, max-age=3600" },
+                "continue": true
+              },
+              { "handle": "filesystem" },
+              { "src": "/(.*)", "dest": "/index.html" }
+            ]
+          }
+          EOF
+
+      - name: Deploy Preview (Pull Request)
+        if: github.event_name == 'pull_request'
+        run: vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Production (main branch)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: vercel deploy --prebuilt --prod --token ${{ secrets.VERCEL_TOKEN }}

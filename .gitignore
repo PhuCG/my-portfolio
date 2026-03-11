@@ -51,3 +51,6 @@ app.*.map.json
 .cursor/
 .docs/
 .flutter_sdk/
+
+# Vercel local config (contains project ID / org ID - use GitHub Secrets instead)
+.vercel/
