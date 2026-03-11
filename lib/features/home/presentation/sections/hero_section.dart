@@ -176,7 +176,7 @@ class HeroSection extends StatelessWidget {
                           VaporButton(
                             label: 'DOWNLOAD CV',
                             variant: VaporButtonVariant.secondary,
-                            onPressed: () => _launch('mailto:abc@gmail.com'),
+                          onPressed: () => _launch(PortfolioData.email),
                           ),
                           VaporButton(
                             label: 'GITHUB →',

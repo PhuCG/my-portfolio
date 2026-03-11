@@ -238,7 +238,8 @@ class PortfolioData {
     '15+': 'FEATURE MODULES SHIPPED',
   };
 
-  static const String githubUrl = 'https://github.com/';
-  static const String linkedinUrl = 'https://linkedin.com/in/';
-  static const String email = 'mailto:abc@gmail.com';
+  static const String githubUrl = 'https://github.com/PhuCG';
+  static const String linkedinUrl =
+      'https://www.linkedin.com/in/phu%CC%81-nguy%C3%AA%CC%83n-8abbab36a/';
+  static const String email = 'mailto:nguyentrongphu143@gmail.com';
 }
