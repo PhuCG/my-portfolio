@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "skills": {
+    "flutter-animation": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "3e574c64df9afb6fb6f61b0ab1e6e8012776e18e88c62311fa95019e64203ca4"
+    },
+    "flutter-app-size": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "5410b082eed6e651db81a15e3637f57bb4e85b9bfcfeed212556b06fa768f247"
+    },
+    "flutter-architecture": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "abccd43bb4b439a91de8c10b4a89ff52e65d53a5174c9db4293c33551ce45e0b"
+    },
+    "flutter-http-and-json": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "8d93787042732989e307a32f59096ca02506a76e8855d31feaa3e8af0b667383"
+    },
+    "flutter-performance": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "66ce2d80fdefd9ce89ec11d85e6f904bcf842cb64893b3e68eabbaf28523e8bc"
+    },
+    "flutter-platform-views": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "00190de049c5daae3af653f25d0bb4b9c0b246d246f85538f23baa29e0ce80ba"
+    },
+    "flutter-plugins": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "faed5e200be59e040d46560c66d5538ce3d7d49e28c435d638e48edaeab2e103"
+    },
+    "flutter-state-management": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "dbf88314019bed1a261368aa1c6b0964f05c89cc83f3c6c971f84b9bbbf08369"
+    },
+    "flutter-theming": {
+      "source": "flutter/skills",
+      "sourceType": "github",
+      "computedHash": "f13a39f9b33925cc1a63d55e74d93a18d422a6a9e991f869b7a58155b5276dfd"
+    }
+  }
+}
