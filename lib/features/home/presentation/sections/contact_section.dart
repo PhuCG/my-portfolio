@@ -84,7 +84,7 @@ class ContactSection extends StatelessWidget {
                         // Terminal prompt lines
                         _PromptLine(
                           prompt: '~',
-                          command: 'ping phu@burningbros.com',
+                          command: 'ping nguyentrongphu143@gmail.com',
                           vc: vc,
                         ),
                         const SizedBox(height: 6),
