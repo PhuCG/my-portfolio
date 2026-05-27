@@ -117,6 +117,32 @@ class PortfolioData {
       vaporwaveTagline: 'SQUAD ORDERS. ONE LINK. ZERO CHAOS.',
     ),
     Project(
+      id: 'pitb',
+      title: 'Play In The Box',
+      role: 'Flutter Developer @ Burning Bros',
+      description:
+          'Cross-platform hybrid mobile app (iOS & Android) — a full-screen '
+          'Flutter WebView shell with a bidirectional JavaScript Bridge, '
+          'letting the web team ship new features without app releases. '
+          'Integrated 20+ Korean payment gateways (Toss, Kakao Pay, Naver Pay, '
+          'INICIS…), 4 social auth providers via native SDKs (Kakao, LINE, '
+          'Google, Apple), Firebase FCM with image-rich push notifications, '
+          'and zero-hard-coded config via Remote Config.',
+      techStack: [
+        'Flutter',
+        'GetX',
+        'flutter_inappwebview',
+        'Firebase',
+        'Kakao SDK',
+        'LINE SDK',
+        'TossPayments',
+        'app_links',
+      ],
+      url: '#',
+      impact: '20+ Korean PGs  ·  4 Social Auth  ·  iOS & Android',
+      vaporwaveTagline: 'WHERE KOREA PLAYS. NATIVE POWER. WEB SPEED.',
+    ),
+    Project(
       id: 'yeong',
       title: 'Yeong Coffee',
       role: 'UI/UX Designer & Developer',
@@ -194,8 +220,9 @@ class PortfolioData {
           'Delivering production-grade outsourcing products for international '
           'clients. Shipped an Android IVI app (Kotlin/Compose) for EV fleet '
           'operations, a Flutter EV Driver app with BLE + Shorebird OTA, an '
-          'AI voice journal (Firebase AI + Supabase), and a group-ordering '
-          'platform with multi-language support.',
+          'AI voice journal (Firebase AI + Supabase), a group-ordering '
+          'platform with multi-language support, and a Flutter hybrid app '
+          '(Play In The Box) with 20+ Korean payment gateways & JS Bridge.',
       isHighlighted: true,
     ),
     TimelineEntry(
@@ -234,7 +261,7 @@ class PortfolioData {
   static const Map<String, String> stats = {
     '4+': 'YEARS PRODUCTION EXP.',
     '5M+': 'APP DOWNLOADS',
-    '7+': 'PRODUCTION APPS SHIPPED',
+    '8+': 'PRODUCTION APPS SHIPPED',
     '15+': 'FEATURE MODULES SHIPPED',
   };
 
