@@ -149,6 +149,30 @@ class PortfolioData {
       vaporwaveTagline: 'WHERE KOREA PLAYS. NATIVE POWER. WEB SPEED.',
     ),
     Project(
+      id: 'portfolio',
+      title: 'This Portfolio',
+      role: 'Designer & Developer',
+      description:
+          'Flutter Web portfolio with a custom Vaporwave design system built from '
+          'scratch — CRT scanlines, perspective grid, and glassmorphism via '
+          'CustomPainter; dual dark/light ThemeExtension; no UI kit. '
+          'Design-to-code accelerated ~60% with AI (designprompts.dev + Cursor). '
+          'Deployed on Vercel via a custom build script bootstrapping Flutter SDK '
+          'on Linux CI.',
+      techStack: [
+        'Flutter Web',
+        'Riverpod',
+        'go_router',
+        'flutter_animate',
+        'CustomPainter',
+        'Vercel',
+        'Cursor IDE',
+      ],
+      url: 'https://phucg.dev',
+      impact: 'AI Vibe-Coded  ·  Custom Design System  ·  Vercel CI/CD',
+      vaporwaveTagline: 'THE DEVELOPER WHO SHIPS THEIR OWN AESTHETIC',
+    ),
+    Project(
       id: 'yeong',
       title: 'Yeong Coffee',
       role: 'UI/UX Designer & Developer',
@@ -205,13 +229,13 @@ class PortfolioData {
     SkillGroup(
       title: 'PRODUCT GROWTH & DEVOPS',
       skills: [
-        'Codemagic CI/CD',
+        'Codemagic CI/CD  ·  Shorebird OTA',
+        'Vercel (Flutter Web deploy)',
         'App Store  ·  Google Play Deployment',
         'RevenueCat (IAP / Subscriptions)',
         'Mixpanel  ·  Firebase Analytics',
-        'Cursor IDE  ·  Gemini  ·  Figma AI',
-        'Git  ·  Linear  ·  Slack',
-        'Laravel 8 (Backend)',
+        'AI Workflow: Cursor IDE  ·  Gemini  ·  Claude',
+        'Git  ·  Linear  ·  Figma AI',
       ],
     ),
   ];
