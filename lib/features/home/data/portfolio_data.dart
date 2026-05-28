@@ -7,22 +7,25 @@ class PortfolioData {
     Project(
       id: 'cita',
       title: 'Cita AI',
-      role: 'Flutter Developer',
+      role: 'Flutter Developer (Lead)',
       description:
-          'AI-powered language learning app with real-time conversation, '
-          'speech recognition, and offline-first sync. '
-          'Shipped to App Store & Google Play with zero-downtime CI/CD.',
+          'AI language learning app built from scratch — 15+ feature modules '
+          '(chat, quiz, video, course, onboarding) with real-time AI conversation, '
+          'STT/TTS, voice activity detection, and pronunciation assessment. '
+          'Offline-first via Brick ORM + Firebase. '
+          'Codemagic CI/CD cut deployment time by 80%.',
       techStack: [
         'Flutter',
         'Riverpod',
-        'Firebase',
         'Brick ORM',
+        'Firebase',
         'WebSocket',
         'STT/TTS',
+        'RevenueCat',
         'Codemagic',
       ],
       url: 'https://citaspeak.com/',
-      impact: '28+ Languages  ·  Live on App Store & Google Play',
+      impact: '28+ Languages  ·  App Store & Play  ·  80% Faster Deployments',
       vaporwaveTagline: 'THE PULSE OF GLOBAL COMMUNICATION',
       isFeatured: true,
     ),
@@ -46,7 +49,8 @@ class PortfolioData {
         'AutoRoute',
       ],
       url: '#',
-      impact: 'OTA Updates via Shorebird  ·  BLE + GPS Operations',
+      impact:
+          'OTA Updates via Shorebird  ·  BLE + GPS Operations  ·  <1% Crash Rate',
       vaporwaveTagline: 'VOLTAGE ON WHEELS. DATA IN MOTION.',
     ),
     Project(
@@ -68,7 +72,8 @@ class PortfolioData {
         'Arrow Core',
       ],
       url: '#',
-      impact: 'Android Native IVI  ·  Feature-Based Architecture',
+      impact:
+          'Match Time <10s  ·  Android Native IVI  ·  Feature-Based Architecture',
       vaporwaveTagline: 'THE COCKPIT GOES DIGITAL.',
     ),
     Project(
@@ -90,7 +95,8 @@ class PortfolioData {
         'Clean Architecture',
       ],
       url: '#',
-      impact: 'AI Audio Processing  ·  Offline-First Sync',
+      impact:
+          'Shipped in 6 Weeks  ·  AI Audio Processing  ·  Offline-First Sync',
       vaporwaveTagline: 'YOUR THOUGHTS, IMMORTALIZED IN SOUND.',
     ),
     Project(
@@ -113,7 +119,8 @@ class PortfolioData {
         'i18n (3 locales)',
       ],
       url: '#',
-      impact: 'Shareable-Link Orders  ·  3-Language Support',
+      impact:
+          'Shareable-Link Orders  ·  No-Install Join Flow  ·  3-Language Support',
       vaporwaveTagline: 'SQUAD ORDERS. ONE LINK. ZERO CHAOS.',
     ),
     Project(
@@ -121,25 +128,24 @@ class PortfolioData {
       title: 'Play In The Box',
       role: 'Flutter Developer @ Burning Bros',
       description:
-          'Cross-platform hybrid mobile app (iOS & Android) — a full-screen '
-          'Flutter WebView shell with a bidirectional JavaScript Bridge, '
-          'letting the web team ship new features without app releases. '
-          'Integrated 20+ Korean payment gateways (Toss, Kakao Pay, Naver Pay, '
-          'INICIS…), 4 social auth providers via native SDKs (Kakao, LINE, '
-          'Google, Apple), Firebase FCM with image-rich push notifications, '
-          'and zero-hard-coded config via Remote Config.',
+          'Hybrid WebView e-commerce app (iOS & Android) for the Korean market — '
+          'Flutter native shell with a bidirectional JS Bridge (15+ handlers) '
+          'orchestrating 7+ payment gateways (INICIS, Toss, KakaoPay, Naver Pay, '
+          'PayPal, Payletter, PAYCO) and 5 native social auth flows '
+          '(Apple, Kakao, LINE, Google, Naver). '
+          'Zero-hardcoded config via Firebase Remote Config.',
       techStack: [
         'Flutter',
         'GetX',
         'flutter_inappwebview',
         'Firebase',
-        'Kakao SDK',
-        'LINE SDK',
-        'TossPayments',
+        'Kakao / LINE / Apple SDK',
+        'TossPayments SDK',
         'app_links',
+        'Remote Config',
       ],
-      url: '#',
-      impact: '20+ Korean PGs  ·  4 Social Auth  ·  iOS & Android',
+      url: 'https://pitb.konnect.vn/',
+      impact: '7+ Payment Gateways  ·  5 Social Auth  ·  iOS & Android',
       vaporwaveTagline: 'WHERE KOREA PLAYS. NATIVE POWER. WEB SPEED.',
     ),
     Project(
@@ -221,8 +227,8 @@ class PortfolioData {
           'clients. Shipped an Android IVI app (Kotlin/Compose) for EV fleet '
           'operations, a Flutter EV Driver app with BLE + Shorebird OTA, an '
           'AI voice journal (Firebase AI + Supabase), a group-ordering '
-          'platform with multi-language support, and a Flutter hybrid app '
-          '(Play In The Box) with 20+ Korean payment gateways & JS Bridge.',
+          'platform with VI/EN/KO localization, and Play In The Box — '
+          'a hybrid WebView app with 7+ Korean payment gateways & JS Bridge.',
       isHighlighted: true,
     ),
     TimelineEntry(
