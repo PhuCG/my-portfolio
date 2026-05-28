@@ -245,7 +245,7 @@ class PortfolioData {
       period: '2025 — PRESENT',
       role: 'Mobile Developer',
       company: 'Burning Bros',
-      url: 'https://masothue.com/0316840598-cong-ty-tnhh-burning-bros',
+      url: 'https://burning-bros-super-site.webflow.io/',
       description:
           'Delivering production-grade outsourcing products for international '
           'clients. Shipped an Android IVI app (Kotlin/Compose) for EV fleet '
