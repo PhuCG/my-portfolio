@@ -168,7 +168,7 @@ class PortfolioData {
         'Vercel',
         'Cursor IDE',
       ],
-      url: 'https://phucg.dev',
+      url: 'https://phucg.vercel.app',
       impact: 'AI Vibe-Coded  ·  Custom Design System  ·  Vercel CI/CD',
       vaporwaveTagline: 'THE DEVELOPER WHO SHIPS THEIR OWN AESTHETIC',
     ),
