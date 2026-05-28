@@ -265,7 +265,7 @@ class PortfolioData {
   ];
 
   static const Map<String, String> stats = {
-    '4+': 'YEARS PRODUCTION EXP.',
+    '3+': 'YEARS PRODUCTION EXP.',
     '5M+': 'APP DOWNLOADS',
     '8+': 'PRODUCTION APPS SHIPPED',
     '15+': 'FEATURE MODULES SHIPPED',
